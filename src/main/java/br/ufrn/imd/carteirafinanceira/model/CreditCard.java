@@ -1,4 +1,8 @@
 package br.ufrn.imd.carteirafinanceira.model;
 
-public class CreditCard {
+import java.io.Serializable;
+import java.util.UUID;
+
+public class CreditCard implements Serializable {
+    private int id;
 }
