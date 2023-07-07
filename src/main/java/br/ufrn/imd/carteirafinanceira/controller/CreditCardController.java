@@ -1,2 +1,4 @@
-package br.ufrn.imd.carteirafinanceira.controller;public class CreditCardController {
+package br.ufrn.imd.carteirafinanceira.controller;
+
+public class CreditCardController {
 }

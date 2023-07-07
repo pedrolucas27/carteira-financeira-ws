@@ -1,2 +1,4 @@
-package br.ufrn.imd.carteirafinanceira.model;public class CreditCard {
+package br.ufrn.imd.carteirafinanceira.model;
+
+public class CreditCard {
 }
