@@ -13,7 +13,7 @@ public class LoadData {
     UserDAO userDAO = new UserDAO();
     CreditCardDAO creditCardDAO = new CreditCardDAO();
 
-    @Bean
+  /*  @Bean
     public void loadDefaultData(){
         if(Objects.isNull(userDAO.get("123"))){
             userDAO.save(new User(
@@ -22,5 +22,5 @@ public class LoadData {
         }
 
         //creditCardDAO.save(new CreditCard(0, ))
-    }
+    }*/
 }

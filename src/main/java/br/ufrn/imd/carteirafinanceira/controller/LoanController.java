@@ -17,12 +17,11 @@ public class LoanController {
 
     private final LoanDAO service = new LoanDAO();
 
-
     @PostMapping(value = "fonte", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Boolean> save(@RequestBody BasicFonte fonte){
+    public ResponseEntity<Boolean> registerFonte(@RequestBody BasicFonte fonte){
         boolean result = false;
         try {
-            //result = service.registerFonte(fonte);
+            result = service.registerFonte(fonte);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
