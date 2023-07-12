@@ -1,7 +1,6 @@
 package br.ufrn.imd.carteirafinanceira.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class CreditCard implements Serializable {

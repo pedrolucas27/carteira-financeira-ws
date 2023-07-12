@@ -14,11 +14,10 @@ public class UserDAO implements CrudService<User> {
 
     @Override
     public User get(Object columnValue) {
-        String findQuery = "SELECT * FROM usuario WHERE cpf = ?";
-
         Connection connection = ConnectionDAO.connect();
+
         try {
-            PreparedStatement command = connection.prepareStatement(findQuery);
+            PreparedStatement command = connection.prepareStatement("SELECT * FROM usuario WHERE cpf = ?");
             command.setObject(1, columnValue);
 
             ResultSet rSet = command.executeQuery();
@@ -65,13 +64,11 @@ public class UserDAO implements CrudService<User> {
 
     @Override
     public boolean delete(User item) {
-        String deleteQuery = "DELETE FROM usuario WHERE cpf = ?";
-
         Connection connection = ConnectionDAO.connect();
         boolean result;
 
         try {
-            PreparedStatement command = connection.prepareStatement(deleteQuery);
+            PreparedStatement command = connection.prepareStatement("DELETE FROM usuario WHERE cpf = ?");
 
             command.setString(1, item.getCpf());
             command.execute();
@@ -88,13 +85,11 @@ public class UserDAO implements CrudService<User> {
 
     @Override
     public List<User> listAll() {
-        String selectQuery = "SELECT * FROM usuario";
-
         Connection connection = ConnectionDAO.connect();
         List<User> list;
 
         try {
-            PreparedStatement command = connection.prepareStatement(selectQuery);
+            PreparedStatement command = connection.prepareStatement("SELECT * FROM usuario");
             ResultSet rSet = command.executeQuery();
 
             list = new ArrayList<>();
