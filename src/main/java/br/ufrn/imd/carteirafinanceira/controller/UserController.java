@@ -1,7 +1,7 @@
 package br.ufrn.imd.carteirafinanceira.controller;
 
-import br.ufrn.imd.carteirafinanceira.dao.UsuarioDAO;
-import br.ufrn.imd.carteirafinanceira.model.Usuario;
+import br.ufrn.imd.carteirafinanceira.dao.UserDAO;
+import br.ufrn.imd.carteirafinanceira.model.User;
 import br.ufrn.imd.carteirafinanceira.service.CrudService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -12,19 +12,27 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/user")
-public class UsuarioController {
+public class UserController {
 
-    private final CrudService<Usuario> service = new UsuarioDAO();
+    private final CrudService<User> service = new UserDAO();
+
+
+    //enviar token
+    @PostMapping(value = "login", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<String> login(@RequestBody User user){
+        return null;
+    }
+
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Boolean> salvar(@RequestBody Usuario usuario){
-        boolean result = service.save(usuario);
+    public ResponseEntity<Boolean> salvar(@RequestBody User user){
+        boolean result = service.save(user);
         return new ResponseEntity<>(result, result ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping
-    public ResponseEntity<List<Usuario>> listarTodos(){
-        List<Usuario> result = service.listAll();
+    public ResponseEntity<List<User>> listarTodos(){
+        List<User> result = service.listAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

@@ -2,7 +2,7 @@ package br.ufrn.imd.carteirafinanceira.model;
 
 import java.io.Serializable;
 
-public class Conta implements Serializable {
+public class Account implements Serializable {
 
     private int id;
     private String nome;

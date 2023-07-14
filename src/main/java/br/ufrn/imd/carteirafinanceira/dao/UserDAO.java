@@ -1,6 +1,6 @@
 package br.ufrn.imd.carteirafinanceira.dao;
 
-import br.ufrn.imd.carteirafinanceira.model.Usuario;
+import br.ufrn.imd.carteirafinanceira.model.User;
 import br.ufrn.imd.carteirafinanceira.service.CrudService;
 
 import java.sql.Connection;
@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAO implements CrudService<Usuario> {
+public class UserDAO implements CrudService<User> {
 
     @Override
-    public Usuario get(Object columnValue) {
+    public User get(Object columnValue) {
         Connection connection = ConnectionDAO.connect();
 
         try {
@@ -35,7 +35,7 @@ public class UsuarioDAO implements CrudService<Usuario> {
     }
 
     @Override
-    public boolean save(Usuario item) {
+    public boolean save(User item) {
         String insertQuery = "INSERT INTO usuario(cpf, nome, login, senha, email) VALUES(?,?,?,?,?)";
 
         Connection connection = ConnectionDAO.connect();
@@ -63,7 +63,7 @@ public class UsuarioDAO implements CrudService<Usuario> {
     }
 
     @Override
-    public boolean delete(Usuario item) {
+    public boolean delete(User item) {
         Connection connection = ConnectionDAO.connect();
         boolean result;
 
@@ -84,9 +84,9 @@ public class UsuarioDAO implements CrudService<Usuario> {
     }
 
     @Override
-    public List<Usuario> listAll() {
+    public List<User> listAll() {
         Connection connection = ConnectionDAO.connect();
-        List<Usuario> list;
+        List<User> list;
 
         try {
             PreparedStatement command = connection.prepareStatement("SELECT * FROM usuario");
@@ -106,7 +106,7 @@ public class UsuarioDAO implements CrudService<Usuario> {
     }
 
     @Override
-    public boolean update(Usuario item) {
+    public boolean update(User item) {
         String updateQuery = "UPDATE usuario set cpf = ?, nome = ?, login = ?, email = ? WHERE cpf = ?";
 
         Connection connection = ConnectionDAO.connect();
@@ -131,14 +131,14 @@ public class UsuarioDAO implements CrudService<Usuario> {
         return result;
     }
 
-    private Usuario buildUser(ResultSet rSet) throws SQLException {
-        Usuario usuario = new Usuario(
+    private User buildUser(ResultSet rSet) throws SQLException {
+        User user = new User(
                 rSet.getString("cpf"),
                 rSet.getString("nome"),
                 rSet.getString("login"),
                 null,
                 rSet.getString("email")
                 );
-        return usuario;
+        return user;
     }
 }

@@ -1,7 +1,7 @@
 package br.ufrn.imd.carteirafinanceira.dao;
 
 import br.ufrn.imd.carteirafinanceira.model.FinancialGoal;
-import br.ufrn.imd.carteirafinanceira.model.Usuario;
+import br.ufrn.imd.carteirafinanceira.model.User;
 import br.ufrn.imd.carteirafinanceira.service.CrudService;
 
 import java.sql.Connection;
@@ -12,7 +12,7 @@ import java.util.Objects;
 
 public class FinancialGoalDAO implements CrudService<FinancialGoal> {
 
-    UsuarioDAO usuarioDAO = new UsuarioDAO();
+    UserDAO userDAO = new UserDAO();
     @Override
     public FinancialGoal get(Object columnValue) {
         return null;
@@ -21,8 +21,8 @@ public class FinancialGoalDAO implements CrudService<FinancialGoal> {
     @Override
     public boolean save(FinancialGoal item) {
 
-        Usuario usuario = usuarioDAO.get(item.getCpf_usuario());
-        if(Objects.nonNull(usuario)) return false;
+        User user = userDAO.get(item.getCpf_usuario());
+        if(Objects.nonNull(user)) return false;
 
         String insertQuery = "INSERT INTO " +
                 "meta_financeira(nome, valor_meta , valor_atual, cpf_usuario) " +
@@ -65,4 +65,6 @@ public class FinancialGoalDAO implements CrudService<FinancialGoal> {
     public boolean update(FinancialGoal item) {
         return false;
     }
+
+    public record GoalResponse(String nome, int valor_pendente){}
 }

@@ -1,7 +1,7 @@
 package br.ufrn.imd.carteirafinanceira.controller;
 
 import br.ufrn.imd.carteirafinanceira.dao.LoanDAO;
-import br.ufrn.imd.carteirafinanceira.model.BasicFonte;
+import br.ufrn.imd.carteirafinanceira.model.BasicSource;
 import br.ufrn.imd.carteirafinanceira.model.Loan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,12 +17,11 @@ public class LoanController {
 
     private final LoanDAO service = new LoanDAO();
 
-
     @PostMapping(value = "fonte", produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Boolean> save(@RequestBody BasicFonte fonte){
+    public ResponseEntity<Boolean> registerFonte(@RequestBody BasicSource fonte){
         boolean result = false;
         try {
-            //result = service.registerFonte(fonte);
+            result = service.registerFonte(fonte);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,13 +1,13 @@
 package br.ufrn.imd.carteirafinanceira.model;
 
-public class Transferencia {
+public class Transfer {
 
     private int id;
     private int idContaOrigem;
     private int idContaDestino;
     private double valor;
 
-    public Transferencia(int idContaOrigem, int idContaDestino, double valor) {
+    public Transfer(int idContaOrigem, int idContaDestino, double valor) {
         this.idContaOrigem = idContaOrigem;
         this.idContaDestino = idContaDestino;
         this.valor = valor;

@@ -1,6 +1,6 @@
 package br.ufrn.imd.carteirafinanceira.dao;
 
-import br.ufrn.imd.carteirafinanceira.model.Conta;
+import br.ufrn.imd.carteirafinanceira.model.Account;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ContaDAO {
 
-    public Conta get(int id) {
+    public Account get(int id) {
         Connection connection = ConnectionDAO.connect();
         try {
             PreparedStatement command = connection.prepareStatement("SELECT * FROM conta WHERE id = ?");
@@ -28,7 +28,7 @@ public class ContaDAO {
         }
     }
 
-    public boolean salvar(Conta item) {
+    public boolean salvar(Account item) {
         String queryInsert = "insert into conta (nome, saldo, instituicao, cpf_usuario) values (?,?,?,?)";
 
         Connection connection = ConnectionDAO.connect();
@@ -54,9 +54,9 @@ public class ContaDAO {
     }
 
 
-    public List<Conta> listarContasPorCpf(String cpfUsuario) {
+    public List<Account> listarContasPorCpf(String cpfUsuario) {
         Connection connection = ConnectionDAO.connect();
-        List<Conta> list;
+        List<Account> list;
 
         try {
             PreparedStatement command = connection.prepareStatement("SELECT id, nome, instituicao, saldo FROM conta where cpf_usuario = ?");
@@ -75,12 +75,12 @@ public class ContaDAO {
         return list;
     }
 
-    public void atualizarSaldo(Connection connection, Conta conta) {
+    public void atualizarSaldo(Connection connection, Account account) {
         try {
             PreparedStatement command = connection.prepareStatement("UPDATE conta set saldo = ? WHERE id = ?");
 
-            command.setDouble(1, conta.getSaldo());
-            command.setInt(2, conta.getId());
+            command.setDouble(1, account.getSaldo());
+            command.setInt(2, account.getId());
 
             command.executeUpdate();
         } catch (SQLException e) {
@@ -88,12 +88,12 @@ public class ContaDAO {
         }
     }
 
-    private Conta construirConta(ResultSet rSet) throws SQLException {
-        Conta conta = new Conta();
-        conta.setId(rSet.getInt("id"));
-        conta.setSaldo(rSet.getDouble("saldo"));
-        conta.setNome(rSet.getString("nome"));
-        conta.setInstituicao(rSet.getString("instituicao"));
-        return conta;
+    private Account construirConta(ResultSet rSet) throws SQLException {
+        Account account = new Account();
+        account.setId(rSet.getInt("id"));
+        account.setSaldo(rSet.getDouble("saldo"));
+        account.setNome(rSet.getString("nome"));
+        account.setInstituicao(rSet.getString("instituicao"));
+        return account;
     }
 }
