@@ -3,16 +3,16 @@ package br.ufrn.imd.carteirafinanceira.model;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-public class BasicFonte implements Serializable {
+public class BasicSource implements Serializable {
     int id;
     String nome;
 
-    public BasicFonte(String nome) {
+    public BasicSource(String nome) {
         this.nome = nome;
     }
 
-    public static BasicFonte buldFonte(ResultSet rSet) throws SQLException {
-        return new BasicFonte(rSet.getString("nome"));
+    public static BasicSource buldFonte(ResultSet rSet) throws SQLException {
+        return new BasicSource(rSet.getString("nome"));
     }
 
     public int getId() {

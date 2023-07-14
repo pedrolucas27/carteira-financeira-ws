@@ -1,6 +1,6 @@
 package br.ufrn.imd.carteirafinanceira.dao;
 
-import br.ufrn.imd.carteirafinanceira.model.BasicFonte;
+import br.ufrn.imd.carteirafinanceira.model.BasicSource;
 import br.ufrn.imd.carteirafinanceira.model.Loan;
 import br.ufrn.imd.carteirafinanceira.service.CrudService;
 
@@ -14,7 +14,7 @@ import java.util.Objects;
 public class LoanDAO implements CrudService<Loan> {
 
 
-    public BasicFonte getFonteByName(String name){
+    public BasicSource getFonteByName(String name){
         String selectQuery = "SELECT * FROM fonte_emprestimo WHERE nome = ?";
 
         Connection connection = ConnectionDAO.connect();
@@ -25,7 +25,7 @@ public class LoanDAO implements CrudService<Loan> {
             ResultSet rSet = command.executeQuery();
 
             if (rSet.next()){
-                return BasicFonte.buldFonte(rSet);
+                return BasicSource.buldFonte(rSet);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -36,7 +36,7 @@ public class LoanDAO implements CrudService<Loan> {
         return null;
     }
 
-    public boolean registerFonte(BasicFonte basicFonte){
+    public boolean registerFonte(BasicSource basicFonte){
         if(Objects.nonNull(getFonteByName(basicFonte.getNome()))) return true;
 
         String insertQuery = "INSERT INTO fonte_emprestimo(nome) VALUES(?)";

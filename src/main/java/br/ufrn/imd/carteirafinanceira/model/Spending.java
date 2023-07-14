@@ -5,14 +5,17 @@ enum STATUS{
     PENDENTE
 }
 public class Spending extends Transaction{
-    STATUS status_pagamento;
+  //  STATUS status_pagamento;
+
+    int status_pagamento;
     int id_categoria;
 
-    public STATUS getStatus_pagamento() {
+
+    public int getStatus_pagamento() {
         return status_pagamento;
     }
 
-    public Spending(STATUS status_pagamento, int id_categoria, int id_transaco) {
+    public Spending(int status_pagamento, int id_categoria, int id_transaco) {
         this.status_pagamento = status_pagamento;
         this.id_categoria = id_categoria;
     }

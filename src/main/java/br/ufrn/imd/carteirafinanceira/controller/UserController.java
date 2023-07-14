@@ -17,6 +17,14 @@ public class UserController {
 
     private final CrudService<User> service = new UserDAO();
 
+
+    //enviar token
+    @PostMapping(value = "login", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<String> login(@RequestBody User user){
+        return null;
+    }
+
+
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Boolean> save(@RequestBody User user){
         boolean result = service.save(user);
