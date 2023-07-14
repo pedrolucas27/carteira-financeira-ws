@@ -1,12 +1,12 @@
 package br.ufrn.imd.carteirafinanceira.service;
 
-import br.ufrn.imd.carteirafinanceira.model.Transfer;
+import br.ufrn.imd.carteirafinanceira.model.Transferencia;
 
 import java.sql.SQLException;
 
 public interface TransferService {
 
-    void save(Transfer transfer);
+    void save(Transferencia transferencia);
 
-    void performTransfer(Transfer transfer) throws SQLException, IllegalArgumentException;
+    void performTransfer(Transferencia transferencia) throws SQLException, IllegalArgumentException;
 }

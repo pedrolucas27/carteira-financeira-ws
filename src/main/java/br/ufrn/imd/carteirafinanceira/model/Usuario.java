@@ -2,7 +2,7 @@ package br.ufrn.imd.carteirafinanceira.model;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class Usuario implements Serializable {
 
     private String cpf;
     private String nome;
@@ -10,7 +10,7 @@ public class User implements Serializable {
     private String senha;
     private String email;
 
-    public User(String cpf, String nome, String login, String senha, String email) {
+    public Usuario(String cpf, String nome, String login, String senha, String email) {
         this.cpf = cpf;
         this.nome = nome;
         this.login = login;

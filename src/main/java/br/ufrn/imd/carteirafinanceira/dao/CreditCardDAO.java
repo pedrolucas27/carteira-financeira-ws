@@ -1,6 +1,6 @@
 package br.ufrn.imd.carteirafinanceira.dao;
 import br.ufrn.imd.carteirafinanceira.model.CreditCard;
-import br.ufrn.imd.carteirafinanceira.model.User;
+import br.ufrn.imd.carteirafinanceira.model.Usuario;
 import br.ufrn.imd.carteirafinanceira.service.CrudService;
 
 import java.math.BigDecimal;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class CreditCardDAO implements CrudService<CreditCard> {
-    private final UserDAO userDAO = new UserDAO();
+    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 
     private Date convertDate(LocalDate date){
@@ -43,9 +43,9 @@ public class CreditCardDAO implements CrudService<CreditCard> {
     @Override
     public boolean save(CreditCard item) {
 
-         User user = userDAO.get(item.getCpf_usuario());
+         Usuario usuario = usuarioDAO.get(item.getCpf_usuario());
 
-         if(Objects.isNull(user)){
+         if(Objects.isNull(usuario)){
                 return false;
          }
 

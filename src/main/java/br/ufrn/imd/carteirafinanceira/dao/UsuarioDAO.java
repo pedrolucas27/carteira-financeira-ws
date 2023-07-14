@@ -1,6 +1,6 @@
 package br.ufrn.imd.carteirafinanceira.dao;
 
-import br.ufrn.imd.carteirafinanceira.model.User;
+import br.ufrn.imd.carteirafinanceira.model.Usuario;
 import br.ufrn.imd.carteirafinanceira.service.CrudService;
 
 import java.sql.Connection;
@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements CrudService<User> {
+public class UsuarioDAO implements CrudService<Usuario> {
 
     @Override
-    public User get(Object columnValue) {
+    public Usuario get(Object columnValue) {
         Connection connection = ConnectionDAO.connect();
 
         try {
@@ -35,7 +35,7 @@ public class UserDAO implements CrudService<User> {
     }
 
     @Override
-    public boolean save(User item) {
+    public boolean save(Usuario item) {
         String insertQuery = "INSERT INTO usuario(cpf, nome, login, senha, email) VALUES(?,?,?,?,?)";
 
         Connection connection = ConnectionDAO.connect();
@@ -63,7 +63,7 @@ public class UserDAO implements CrudService<User> {
     }
 
     @Override
-    public boolean delete(User item) {
+    public boolean delete(Usuario item) {
         Connection connection = ConnectionDAO.connect();
         boolean result;
 
@@ -84,9 +84,9 @@ public class UserDAO implements CrudService<User> {
     }
 
     @Override
-    public List<User> listAll() {
+    public List<Usuario> listAll() {
         Connection connection = ConnectionDAO.connect();
-        List<User> list;
+        List<Usuario> list;
 
         try {
             PreparedStatement command = connection.prepareStatement("SELECT * FROM usuario");
@@ -106,7 +106,7 @@ public class UserDAO implements CrudService<User> {
     }
 
     @Override
-    public boolean update(User item) {
+    public boolean update(Usuario item) {
         String updateQuery = "UPDATE usuario set cpf = ?, nome = ?, login = ?, email = ? WHERE cpf = ?";
 
         Connection connection = ConnectionDAO.connect();
@@ -131,14 +131,14 @@ public class UserDAO implements CrudService<User> {
         return result;
     }
 
-    private User buildUser(ResultSet rSet) throws SQLException {
-        User user = new User(
+    private Usuario buildUser(ResultSet rSet) throws SQLException {
+        Usuario usuario = new Usuario(
                 rSet.getString("cpf"),
                 rSet.getString("nome"),
                 rSet.getString("login"),
                 null,
                 rSet.getString("email")
                 );
-        return user;
+        return usuario;
     }
 }

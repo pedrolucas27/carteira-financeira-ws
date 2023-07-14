@@ -1,7 +1,7 @@
 package br.ufrn.imd.carteirafinanceira.controller;
 
-import br.ufrn.imd.carteirafinanceira.dao.TransferDAO;
-import br.ufrn.imd.carteirafinanceira.model.Transfer;
+import br.ufrn.imd.carteirafinanceira.dao.TransferenciaDAO;
+import br.ufrn.imd.carteirafinanceira.model.Transferencia;
 import br.ufrn.imd.carteirafinanceira.service.TransferService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/transfer")
-public class TransferController {
+public class TransferenciaController {
 
-    private final TransferService transferService = new TransferDAO();
+    private final TransferService transferService = new TransferenciaDAO();
 
     @PostMapping
-    public ResponseEntity<?> transfer(@RequestBody Transfer transfer) {
+    public ResponseEntity<?> transfer(@RequestBody Transferencia transferencia) {
         try {
-            transferService.performTransfer(transfer);
+            transferService.performTransfer(transferencia);
             return new ResponseEntity<>(HttpStatus.OK);
         }catch (Exception ex){
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
