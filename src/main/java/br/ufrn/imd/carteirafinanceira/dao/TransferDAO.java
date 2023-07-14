@@ -1,6 +1,7 @@
 package br.ufrn.imd.carteirafinanceira.dao;
 
 import br.ufrn.imd.carteirafinanceira.model.Account;
+import br.ufrn.imd.carteirafinanceira.model.Transaction;
 import br.ufrn.imd.carteirafinanceira.model.Transfer;
 import br.ufrn.imd.carteirafinanceira.service.TransferService;
 
@@ -11,21 +12,30 @@ import java.sql.SQLException;
 public class TransferDAO implements TransferService {
 
     private final ContaDAO contaDAO = new ContaDAO();
+    private final TransactionDAO transactionDAO = new TransactionDAO();
 
     @Override
-    public void save(Transfer transfer) {
+    public boolean save(Transfer transfer) {
         Connection connection = ConnectionDAO.connect();
+        boolean result;
         try {
+            connection.setAutoCommit(false);
+
             PreparedStatement command = connection.prepareStatement("INSERT INTO transferencia (id_conta_origem, id_conta_destino, valor) VALUES (?, ?, ?)");
             command.setInt(1, transfer.getIdContaOrigem());
             command.setInt(2, transfer.getIdContaDestino());
             command.setDouble(3, transfer.getValor());
             command.executeUpdate();
+
+            connection.commit();
+            result = true;
         }catch (SQLException e) {
+            rollback(connection);
             throw new RuntimeException(e);
         } finally {
             ConnectionDAO.disconnect();
         }
+        return result;
     }
 
 
@@ -42,7 +52,10 @@ public class TransferDAO implements TransferService {
 
         boolean result = process(originAccount, destinyAccount, transfer.getValor());
 
-        if(result) this.save(transfer);
+        if(result) {
+            this.save(transfer);
+            //salvar a transação
+        }
         else throw new RuntimeException("Não foi possível realizar esta operação.");
     }
 

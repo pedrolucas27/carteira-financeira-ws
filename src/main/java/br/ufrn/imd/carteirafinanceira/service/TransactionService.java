@@ -6,9 +6,9 @@ import br.ufrn.imd.carteirafinanceira.model.Transaction;
 
 public interface TransactionService {
 
-    public boolean processNewTransactionSpedin(Spending transaction);
+    boolean processNewTransactionSpedin(Spending transaction);
 
     boolean processNewTransactionProof(Proof transaction);
 
-    public int  saveTransaction(Transaction item);
+    int  saveTransaction(Transaction item);
 }

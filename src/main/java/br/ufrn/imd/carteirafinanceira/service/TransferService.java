@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public interface TransferService {
 
-    void save(Transfer transfer);
+    boolean save(Transfer transfer);
 
     void performTransfer(Transfer transfer) throws SQLException, IllegalArgumentException;
 }

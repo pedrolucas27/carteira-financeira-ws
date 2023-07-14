@@ -25,13 +25,13 @@ public class UserController {
 
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Boolean> salvar(@RequestBody User user){
+    public ResponseEntity<Boolean> save(@RequestBody User user){
         boolean result = service.save(user);
         return new ResponseEntity<>(result, result ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
     }
 
     @GetMapping
-    public ResponseEntity<List<User>> listarTodos(){
+    public ResponseEntity<List<User>> listAll(){
         List<User> result = service.listAll();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }

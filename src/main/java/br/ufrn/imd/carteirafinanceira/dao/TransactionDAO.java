@@ -28,6 +28,7 @@ public class TransactionDAO implements TransactionService {
         }
         return 0;
     }
+
     private Date convertDate(LocalDate date){
         return java.sql.Date.valueOf(date);
     }
@@ -72,11 +73,11 @@ public class TransactionDAO implements TransactionService {
     }
 
     @Override
-    public int  saveTransaction(Transaction item) {
+    public int saveTransaction(Transaction item) {
         String insertQuery = "INSERT INTO transacao(data, valor, id_conta, id) VALUES(?,?,?,?)";
         int id = generateIdTransaction();
         Connection connection = ConnectionDAO.connect();
-        boolean result;
+
         try {
             PreparedStatement command = connection.prepareStatement(insertQuery);
             command.setDate(1, convertDate(item.getData()));
@@ -84,7 +85,6 @@ public class TransactionDAO implements TransactionService {
             command.setInt(3, item.getId_conta());
             command.setInt(4, id);
             command.execute();
-            result = true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         } finally {
